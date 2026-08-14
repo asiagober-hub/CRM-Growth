@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ProspectIQ CRM</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 100vh;
+    background: #101828;
+    color: white;
+    padding: 25px 15px;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 35px;
+}
+
+.logo span {
+    opacity: .6;
+}
+
+.nav button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #b8c2d1;
+    text-align: left;
+    padding: 13px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.nav button:hover,
+.nav button.active {
+    background: #243044;
+    color: white;
+}
+
+/* MAIN */
+
+.main {
+    margin-left: 240px;
+    padding: 35px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 28px;
+}
+
+.header p {
+    color: #667085;
+    margin-top: 6px;
+}
+
+.primary {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* CARDS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.card p {
+    color: #667085;
+    font-size: 13px;
+}
+
+.card h2 {
+    margin-top: 10px;
+    font-size: 28px;
+}
+
+/* CONTENT */
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 22px;
+}
+
+.panel {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.panel h2 {
+    margin-bottom: 7px;
+}
+
+.panel-subtitle {
+    color: #667085;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* TABLE */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    font-size: 12px;
+    color: #667085;
+    padding: 12px 8px;
+    border-bottom: 1px solid #eee;
+}
+
+td {
+    padding: 15px 8px;
+    border-bottom: 1px solid #f0f2f5;
+    font-size: 14px;
+}
+
+.badge {
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.high {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.low {
+    background: #f3f4f6;
+    color: #475467;
+}
+
+/* AI */
+
+.ai-box {
+    text-align: center;
+}
+
+.ai-icon {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.ai-box p {
+    color: #667085;
+    line-height: 1.5;
+    margin: 15px 0 20px;
+}
+
+.ai-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #111827;
+    color: white;
+    cursor: pointer;
+}
+
+/* SECTIONS */
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* FORM */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #475467;
+}
+
+input,
+select,
+textarea {
+    border: 1px solid #d0d5dd;
+    border-radius: 7px;
+    padding: 11px;
+    font-size: 14px;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+/* PIPELINE */
+
+.pipeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.pipeline-column {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 12px;
+    min-height: 250px;
+}
+
+.pipeline-column h3 {
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.deal {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+/* MOBILE */
+
+@media(max-width: 900px) {
+
+    .sidebar {
+        width: 70px;
+    }
+
+    .logo {
+        font-size: 0;
+    }
+
+    .logo span {
+        font-size: 20px;
+    }
+
+    .nav button {
+        font-size: 0;
+        text-align: center;
+    }
+
+    .main {
+        margin-left: 70px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pipeline {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="logo">
+ProspectIQ <span>CRM</span>
+</div>
+
+<div class="nav">
+
+<button class="active" onclick="showSection('dashboard', this)">
+🏠 Dashboard
+</button>
+
+<button onclick="showSection('companies', this)">
+🏢 Companies
+</button>
+
+<button onclick="showSection('contacts', this)">
+👤 Contacts
+</button>
+
+<button onclick="showSection('pipeline', this)">
+🎯 Pipeline
+</button>
+
+<button onclick="showSection('activities', this)">
+📞 Activities
+</button>
+
+<button onclick="showSection('ai', this)">
+🤖 AI Sales
+</button>
+
+<button onclick="showSection('reports', this)">
+📊 Reports
+</button>
+
+</div>
+
+</aside>
+
+
+<main class="main">
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="section active">
+
+<div class="header">
+
+<div>
+<h1>Good morning 👋</h1>
+<p>Find your next staffing opportunity.</p>
+</div>
+
+<button class="primary"
+onclick="showSection('companies')">
++ Add Prospect
+</button>
+
+</div>
+
+
+<div class="stats">
+
+<div class="card">
+<p>Total Prospects</p>
+<h2 id="totalProspects">0</h2>
+</div>
+
+<div class="card">
+<p>🔥 High Potential</p>
+<h2 id="highProspects">0</h2>
+</div>
+
+<div class="card">
+<p>📅 Follow-Ups</p>
+<h2 id="followUps">0</h2>
+</div>
+
+<div class="card">
+<p>🏆 Deals Won</p>
+<h2 id="wonDeals">0</h2>
+</div>
+
+</div>
+
+
+<div class="grid">
+
+<div class="panel">
+
+<h2>🔥 Hot Prospects</h2>
+
+<p class="panel-subtitle">
+Companies with the highest opportunity scores.
+</p>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Company</th>
+<th>Industry</th>
+<th>Location</th>
+<th>Score</th>
+<th>Stage</th>
+</tr>
+
+</thead>
+
+<tbody id="prospectTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="panel ai-box">
+
+<div class="ai-icon">🤖</div>
+
+<h2>AI Sales Assistant</h2>
+
+<p>
+Get a personalized approach for your next prospect.
+</p>
+
+<button class="ai-button"
+onclick="showSection('ai')">
+
+Generate Strategy
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- COMPANIES -->
+
+<section id="companies" class="section">
+
+<div class="header">
+
+<div>
+<h1>Companies</h1>
+<p>Add and manage your prospects.</p>
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Company Name</label>
+
+<input id="companyName"
+placeholder="Example: Piedmont Construction">
+
+</div>
+
+<div class="form-group">
+
+<label>Location</label>
+
+<input id="companyLocation"
+placeholder="McDonough, GA">
+
+</div>
+
+<div class="form-group">
+
+<label>Industry</label>
+
+<select id="companyIndustry">
+
+<option>Construction</option>
+<option>Warehouse</option>
+<option>Manufacturing</option>
+<option>Logistics</option>
+<option>Healthcare</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Hiring Now?</label>
+
+<select id="hiring">
+
+<option>Yes</option>
+<option>No</option>
+<option>Unknown</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Open Positions</label>
+
+<input id="openPositions"
+type="number"
+placeholder="0">
+
+</div>
+
+<div class="form-group">
+
+<label>Current Staffing Agency</label>
+
+<input id="staffingAgency"
+placeholder="Unknown">
+
+</div>
+
+<div class="form-group full">
+
+<label>Why is this a prospect?</label>
+
+<textarea id="description"
+placeholder="Hiring activity, expansion, multiple shifts, etc."></textarea>
+
+</div>
+
+</div>
+
+<br>
+
+<button class="primary"
+onclick="addCompany()">
+
+Save Prospect
+
+</button>
+
+</div>
+
+<br>
+
+<div class="panel">
+
+<h2>All Companies</h2>
+
+<br>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Company</th>
+<th>Industry</th>
+<th>Location</th>
+<th>Score</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody id="companyList">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- CONTACTS -->
+
+<section id="contacts" class="section">
+
+<div class="header">
+
+<div>
+<h1>Contacts</h1>
+<p>Manage decision makers and hiring contacts.</p>
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Contact Name</label>
+
+<input id="contactName">
+
+</div>
+
+<div class="form-group">
+
+<label>Job Title</label>
+
+<input id="contactTitle"
+placeholder="HR Manager">
+
+</div>
+
+<div class="form-group">
+
+<label>Phone</label>
+
+<input id="contactPhone">
+
+</div>
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input id="contactEmail">
+
+</div>
+
+<div class="form-group full">
+
+<label>Company</label>
+
+<input id="contactCompany">
+
+</div>
+
+</div>
+
+<br>
+
+<button class="primary"
+onclick="saveContact()">
+
+Save Contact
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- PIPELINE -->
+
+<section id="pipeline" class="section">
+
+<div class="header">
+
+<div>
+
+<h1>Sales Pipeline</h1>
+
+<p>Move prospects through your sales process.</p>
+
+</div>
+
+</div>
+
+<div class="pipeline">
+
+<div class="pipeline-column">
+
+<h3>NEW</h3>
+
+<div class="deal">
+Piedmont Construction
+</div>
+
+</div>
+
+<div class="pipeline-column">
+
+<h3>CONTACTED</h3>
+
+<div class="deal">
+Medline Industries
+</div>
+
+</div>
+
+<div class="pipeline-column">
+
+<h3>QUALIFIED</h3>
+
+</div>
+
+<div class="pipeline-column">
+
+<h3>MEETING</h3>
+
+</div>
+
+<div class="pipeline-column">
+
+<h3>WON</h3>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ACTIVITIES -->
+
+<section id="activities" class="section">
+
+<div class="header">
+
+<div>
+
+<h1>Activities</h1>
+
+<p>Track calls, emails, meetings and follow-ups.</p>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Company</label>
+
+<input id="activityCompany">
+
+</div>
+
+<div class="form-group">
+
+<label>Activity</label>
+
+<select id="activityType">
+
+<option>Phone Call</option>
+<option>Email</option>
+<option>Meeting</option>
+<option>Follow-Up</option>
+<option>Note</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Next Follow-Up</label>
+
+<input id="followUpDate"
+type="date">
+
+</div>
+
+<div class="form-group full">
+
+<label>Notes</label>
+
+<textarea id="activityNotes"></textarea>
+
+</div>
+
+</div>
+
+<br>
+
+<button class="primary"
+onclick="saveActivity()">
+
+Log Activity
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- AI -->
+
+<section id="ai" class="section">
+
+<div class="header">
+
+<div>
+
+<h1>🤖 AI Sales Assistant</h1>
+
+<p>Build a strategy for your next account.</p>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="form-group">
+
+<label>Company</label>
+
+<input id="aiCompany"
+placeholder="Piedmont Construction">
+
+</div>
+
+<br>
+
+<div class="form-group">
+
+<label>What do you know about this prospect?</label>
+
+<textarea id="aiInfo"
+placeholder="Currently hiring 8 construction workers. Uses another staffing agency. Large projects coming up."></textarea>
+
+</div>
+
+<br>
+
+<button class="primary"
+onclick="generateAI()">
+
+Generate Sales Strategy
+
+</button>
+
+<br><br>
+
+<div id="aiOutput"></div>
+
+</div>
+
+</section>
+
+
+<!-- REPORTS -->
+
+<section id="reports" class="section">
+
+<div class="header">
+
+<div>
+
+<h1>📊 Reports</h1>
+
+<p>Your sales activity and prospecting report.</p>
+
+</div>
+
+<button class="primary"
+onclick="downloadCSV()">
+
+Download CSV
+
+</button>
+
+</div>
+
+<div class="panel">
+
+<h2>Prospecting Summary</h2>
+
+<br>
+
+<p>Total Prospects:
+<strong id="reportTotal">0</strong>
+</p>
+
+<br>
+
+<p>High Potential:
+<strong id="reportHigh">0</strong>
+</p>
+
+<br>
+
+<p>Deals Won:
+<strong id="reportWon">0</strong>
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<script>
+
+let prospects =
+JSON.parse(localStorage.getItem("prospects")) || [];
+
+
+/* NAVIGATION */
+
+function showSection(id, button) {
+
+document.querySelectorAll(".section")
+.forEach(section => {
+section.classList.remove("active");
+});
+
+document.getElementById(id)
+.classList.add("active");
+
+document.querySelectorAll(".nav button")
+.forEach(btn => {
+btn.classList.remove("active");
+});
+
+if(button) {
+button.classList.add("active");
+}
+
+}
+
+
+/* SCORE */
+
+function calculateScore(hiring, positions, description) {
+
+let score = 30;
+
+if(hiring === "Yes") {
+score += 30;
+}
+
+if(positions >= 5) {
+score += 20;
+}
+
+if(description.toLowerCase().includes("expansion")) {
+score += 10;
+}
+
+if(description.toLowerCase().includes("hiring")) {
+score += 10;
+}
+
+return Math.min(score, 100);
+
+}
+
+
+/* ADD COMPANY */
+
+function addCompany() {
+
+const name =
+document.getElementById("companyName").value;
+
+const location =
+document.getElementById("companyLocation").value;
+
+const industry =
+document.getElementById("companyIndustry").value;
+
+const hiring =
+document.getElementById("hiring").value;
+
+const positions =
+parseInt(document.getElementById("openPositions").value) || 0;
+
+const agency =
+document.getElementById("staffingAgency").value;
+
+const description =
+document.getElementById("description").value;
+
+if(!name) {
+
+alert("Company name is required.");
+
+return;
+
+}
+
+const score =
+calculateScore(
+hiring,
+positions,
+description
+);
+
+const prospect = {
+
+id: Date.now(),
+
+name,
+
+location,
+
+industry,
+
+hiring,
+
+positions,
+
+agency,
+
+description,
+
+score,
+
+stage: "New",
+
+created:
+new Date().toLocaleDateString()
+
+};
+
+prospects.push(prospect);
+
+localStorage.setItem(
+"prospects",
+JSON.stringify(prospects)
+);
+
+alert(
+name + " was added successfully!"
+);
+
+document.getElementById("companyName").value = "";
+
+document.getElementById("companyLocation").value = "";
+
+document.getElementById("openPositions").value = "";
+
+document.getElementById("description").value = "";
+
+render();
+
+}
+
+
+/* RENDER */
+
+function render() {
+
+const table =
+document.getElementById("prospectTable");
+
+const companyList =
+document.getElementById("companyList");
+
+table.innerHTML = "";
+
+companyList.innerHTML = "";
+
+
+/* SORT HIGH SCORE FIRST */
+
+const sorted =
+[...prospects]
+.sort((a,b) => b.score - a.score);
+
+
+/* DASHBOARD */
+
+sorted.slice(0,5)
+.forEach(p => {
+
+table.innerHTML += `
+
+<tr>
+
+<td>${p.name}</td>
+
+<td>${p.industry}</td>
+
+<td>${p.location}</td>
+
+<td><strong>${p.score}%</strong></td>
+
+<td>
+<span class="badge high">
+${p.stage}
+</span>
+</td>
+
+</tr>
+
+`;
+
+});
+
+
+/* COMPANY LIST */
+
+sorted.forEach(p => {
+
+let badge =
+p.score >= 70
+? "high"
+: p.score >= 40
+? "medium"
+: "low";
+
+companyList.innerHTML += `
+
+<tr>
+
+<td>${p.name}</td>
+
+<td>${p.industry}</td>
+
+<td>${p.location}</td>
+
+<td>${p.score}%</td>
+
+<td>
+<span class="badge ${badge}">
+${p.hiring}
+</span>
+</td>
+
+</tr>
+
+`;
+
+});
+
+
+/* STATS */
+
+document.getElementById("totalProspects")
+.innerText = prospects.length;
+
+document.getElementById("highProspects")
+.innerText =
+prospects.filter(p => p.score >= 70).length;
+
+document.getElementById("wonDeals")
+.innerText =
+prospects.filter(p => p.stage === "Won").length;
+
+document.getElementById("reportTotal")
+.innerText = prospects.length;
+
+document.getElementById("reportHigh")
+.innerText =
+prospects.filter(p => p.score >= 70).length;
+
+document.getElementById("reportWon")
+.innerText =
+prospects.filter(p => p.stage === "Won").length;
+
+}
+
+
+/* CONTACT */
+
+function saveContact() {
+
+const name =
+document.getElementById("contactName").value;
+
+if(!name) {
+
+alert("Contact name required.");
+
+return;
+
+}
+
+alert(
+"Contact saved: " + name
+);
+
+}
+
+
+/* ACTIVITY */
+
+function saveActivity() {
+
+const company =
+document.getElementById("activityCompany").value;
+
+if(!company) {
+
+alert("Enter a company.");
+
+return;
+
+}
+
+alert(
+"Activity logged for " + company
+);
+
+}
+
+
+/* AI SALES STRATEGY */
+
+function generateAI() {
+
+const company =
+document.getElementById("aiCompany").value;
+
+const info =
+document.getElementById("aiInfo").value;
+
+if(!company) {
+
+alert("Enter a company name.");
+
+return;
+
+}
+
+document.getElementById("aiOutput")
+.innerHTML = `
+
+<div class="panel">
+
+<h2>Sales Strategy: ${company}</h2>
+
+<br>
+
+<h3>🎯 Objective</h3>
+
+<p>
+Determine whether ${company} has recurring
+workforce needs and identify the appropriate
+decision maker.
+</p>
+
+<br>
+
+<h3>📞 Opening</h3>
+
+<p>
+"Hi, I'm reaching out because I work with
+businesses in the South Metro Atlanta area
+that need help managing workforce demands.
+I wanted to find out who handles your staffing
+and workforce needs."
+</p>
+
+<br>
+
+<h3>🔎 Discovery Questions</h3>
+
+<p>
+• What positions are currently the hardest to fill?
+</p>
+
+<p>
+• How quickly do you typically need those positions filled?
+</p>
+
+<p>
+• Are you currently using a staffing partner?
+</p>
+
+<p>
+• What happens when you cannot fill a position?
+</p>
+
+<br>
+
+<h3>🚧 Possible Objection</h3>
+
+<p>
+"We already use a staffing company."
+</p>
+
+<br>
+
+<h3>💬 Response</h3>
+
+<p>
+"That makes sense. I'm not necessarily looking
+to replace a partner that's working well. I'm
+curious, though—when you have an urgent opening
+that your current partner cannot fill, do you
+have another resource you can turn to?"
+</p>
+
+<br>
+
+<h3>➡️ Recommended Next Step</h3>
+
+<p>
+Schedule a short conversation with the person
+responsible for workforce decisions.
+</p>
+
+</div>
+
+`;
+
+}
+
+
+/* CSV */
+
+function downloadCSV() {
+
+let csv =
+"Company,Location,Industry,Hiring,Open Positions,Score,Stage\\n";
+
+prospects.forEach(p => {
+
+csv += `"${p.name}","${p.location}","${p.industry}","${p.hiring}","${p.positions}","${p.score}%","${p.stage}"\\n`;
+
+});
+
+const blob =
+new Blob([csv], {
+type: "text/csv"
+});
+
+const url =
+URL.createObjectURL(blob);
+
+const link =
+document.createElement("a");
+
+link.href = url;
+
+link.download =
+"prospectiq-crm-report.csv";
+
+link.click();
+
+URL.revokeObjectURL(url);
+
+}
+
+
+/* START */
+
+render();
+
+</script>
+
+</body>
+</html>
